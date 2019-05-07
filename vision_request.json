@@ -1,0 +1,16 @@
+{
+  "requests": [
+    {
+      "features": [
+        {
+          "type": "TEXT_DETECTION"
+        }
+      ],
+      "image": {
+        "source": {
+          "imageUri": "gs://tlac-book-covers/REPLACE"
+        }
+      }
+    }
+  ]
+}
