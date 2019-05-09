@@ -14,7 +14,7 @@ for cover in list_blobs(bkt_todo):
 		cover_text = parse_vision_description(cover)
 		cover_text = format_q_search(cover_text)
 
-		print(search_query(cover_text))
+		# print(search_query(cover_text))
 	except:
 		move_blob(bkt_todo, cover, bkt_failed, cover)
 		# Log BQ
