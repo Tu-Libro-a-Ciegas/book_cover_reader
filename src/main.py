@@ -4,6 +4,7 @@ from storage_script import list_blobs, move_blob
 from vision_script import parse_vision_description
 from utils import format_q_search
 
+
 bkt_todo = 'tlac-book-covers-todo'
 bkt_done = 'tlac-book-covers-done'
 bkt_failed = 'tlac-book-covers-failed'
