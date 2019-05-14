@@ -91,4 +91,3 @@ def construct_json_query(query):
             else:
                 pass
     return jbook_dict
-

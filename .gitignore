@@ -127,4 +127,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# VS code settings
+.vscode/
+
+# Temp ndjson
+temp/*.ndjson
+
 # End of https://www.gitignore.io/api/python
