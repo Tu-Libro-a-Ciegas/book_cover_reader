@@ -1,15 +1,20 @@
+import os
 import json
 from google.cloud import bigquery
 
+dataset_name = os.environ.get('dataset_name')
+book_table = os.environ.get('book_table')
+error_table = os.environ.get('error_table')
+
 client = bigquery.Client()
-dataset_ref = client.dataset('book_backend')
+dataset_ref = client.dataset(dataset_name)
 
 
 def get_table_ref(name):
     return dataset_ref.table(name)
 
 
-def create_inventory_table(table_ref=get_table_ref("book_inventory")):
+def create_inventory_table(table_ref=get_table_ref(book_table)):
     schema = [
         bigquery.SchemaField("title", "STRING", mode="NULLABLE"),
         bigquery.SchemaField("subtitle", "STRING", mode="NULLABLE"),
@@ -35,7 +40,7 @@ def create_inventory_table(table_ref=get_table_ref("book_inventory")):
     table = client.create_table(table)
 
 
-def create_error_table(table_ref=get_table_ref("failed_books")):
+def create_error_table(table_ref=get_table_ref(error_table)):
     schema = [
         bigquery.SchemaField("filename", "STRING", mode="NULLABLE"),
         bigquery.SchemaField("error", "STRING", mode="NULLABLE")
@@ -49,9 +54,9 @@ def load_book_from_ndjson(table_name):
     job_config = bigquery.LoadJobConfig()
     job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
 
-    if table_name == "book_inventory":
+    if table_name == book_table:
         path = 'temp/book_info.ndjson'
-    elif table_name == "failed_books":
+    elif table_name == error_table:
         path = 'temp/book_error.ndjson'
 
     with open(path, "rb") as source_file:
