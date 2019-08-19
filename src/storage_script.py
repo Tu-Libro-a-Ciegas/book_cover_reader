@@ -2,7 +2,14 @@ from google.cloud import storage
 
 
 def list_blobs(bucket_name):
-    """Lists all the blobs in the bucket."""
+    """Lists all the blobs in the bucket
+
+    Args:
+        bucket_name (string): name of the bucket
+
+    Returns:
+        list: list containing the name for all blobs in the bucket
+    """
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(bucket_name)
 
@@ -20,7 +27,7 @@ def move_blob(bucket_name, blob_name, new_bucket_name, new_blob_name):
 
     new_blob = source_bucket.copy_blob(
         source_blob, destination_bucket, new_blob_name)
-    
+
     source_blob.delete()
 
     print('Blob {} in bucket {} copied to blob {} in bucket {}.'.format(
