@@ -1,13 +1,5 @@
 import os
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/mnt/c/Users/aleja/Documents/llaves/tlac-vision/tlac-vision-c0786b53c370.json"
-os.environ['bkt_todo'] = "tlac-book-covers-todo"
-os.environ['bkt_done'] = "tlac-book-covers-done"
-os.environ['bkt_failed'] = "tlac-book-covers-failed"
-os.environ['book_table'] = "book_inventory"
-os.environ['error_table'] = "failed_books"
-os.environ['dataset_name'] = "book_backend"
-
 from bigquery_script import load_book_from_ndjson
 from book_api_script import search_query, construct_json_query
 from storage_script import list_blobs, move_blob
