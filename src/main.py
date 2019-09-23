@@ -1,5 +1,6 @@
 import os
 
+from env_variables import *
 from bigquery_script import load_book_from_ndjson
 from book_api_script import search_query, construct_json_query
 from storage_script import list_blobs, move_blob
@@ -22,9 +23,10 @@ def process_front_cover():
                     cover_text = parse_vision_description(cover)
                     cover_text = format_q_search(cover_text)
                     bjson = construct_json_query(cover_text)
-                    print(cover)
                     #write_ndjson_file(bjson)
                     #load_book_from_ndjson(book_table)
+                    print(cover)
+                    
                 except Exception as e:
                     pass
                     #write_ndjson_error_file(cover, str(e))
@@ -33,6 +35,20 @@ def process_front_cover():
                 else:
                     pass
                     #move_blob(bkt_todo, cover, bkt_done, cover)
+
+            elif re.search('^.*[.]2[.].*',cover): #contraportada
+                #guardar el texto en todos
+                try:
+                    text_all = parse_vision_description(cover)
+                    print(text_all)
+                except Exception as e:
+                    pass
+                else:
+                    pass
+
+            else:
+                pass
+      
     else:
         print("no results")
 
