@@ -2,7 +2,10 @@ import os
 import sys
 
 if hasattr(sys, 'ps1'):
-    os.chdir(os.path.join(os.getcwd(), 'src'))
+    try:
+        os.chdir(os.path.join(os.getcwd(), 'src'))
+    except FileNotFoundError:
+        pass
 
 from env_variables import *
 from bigquery_script import load_book_from_ndjson
