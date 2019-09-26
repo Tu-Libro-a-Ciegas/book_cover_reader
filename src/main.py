@@ -1,4 +1,9 @@
 import os
+import sys
+
+if hasattr(sys, 'ps1'):
+    os.chdir(os.path.join(os.getcwd(), 'src'))
+
 from bigquery_script import load_book_from_ndjson
 from book_api_script import search_query, construct_json_query
 from storage_script import list_blobs, move_blob
