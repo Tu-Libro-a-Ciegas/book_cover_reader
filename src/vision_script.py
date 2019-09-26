@@ -16,4 +16,4 @@ def parse_vision_description(filename):
     if s_json.get('textAnnotations') is not None:
         return s_json.get('textAnnotations')[0].get('description')
     else:
-        raise Exception(f"Image {filename} did not contain text")
+        return None

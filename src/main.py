@@ -8,7 +8,7 @@ if hasattr(sys, 'ps1'):
         pass
 
 from env_variables import *
-from bigquery_script import load_book_from_ndjson
+from bigquery_script import load_book_from_ndjson, max_seq_id
 from book_api_script import search_query, construct_json_query
 from storage_script import list_blobs, move_blob
 from vision_script import parse_vision_description
@@ -59,6 +59,27 @@ def process_front_cover():
     else:
         print("no results")
 
-process_front_cover()
+#process_front_cover()
+
+def update_book_inventory():
+
+    if list_blobs(bkt_todo) != []:
+        for cover in list_blobs(bkt_todo):
+            if re.search('^.*[.]1[.].*',cover):
+                mx_sq_id = max_seq_id()
+                seq_id = (mx_sq_id + 1) if mx_sq_id is not None else 1
+                manual_id = re.sub('.[0-9].jpeg', '', cover)
+                cover_text = parse_vision_description(cover)
+                if cover_text is not None:
+                    cover_text = format_q_search(cover_text)
+                    bjson = construct_json_query(cover_text)
 
 
+
+            
+                
+
+    else:
+        print("No books to process")
+
+update_book_inventory()

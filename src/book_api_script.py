@@ -17,7 +17,8 @@ def construct_json_query(query):
     total_items = jbook.get('totalItems')
 
     if total_items == 0:
-        raise Exception(f'There where no results for the query: {query}')
+        # raise Exception(f'There where no results for the query: {query}')
+        return None
     else:
         books = (item for item in jbook.get('items'))
         while done is False:
